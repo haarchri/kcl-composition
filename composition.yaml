@@ -1,0 +1,20 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xrocket.haarchri.io
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: rocket.haarchri.io/v1alpha1
+    kind: XRocket
+  mode: Pipeline
+  pipeline:
+    - step: kcl
+      functionRef:
+        name: crossplane-contrib-function-kcl
+      input:
+        apiVersion: krm.kcl.dev/v1alpha1
+        kind: KCLRun
+        spec:
+          source: |
+            # insert-me-here
